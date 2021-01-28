@@ -1,0 +1,40 @@
+ //EVIDENCE
+
+//TODO:: marginal inferene or inference?
+
+infectious(person)
+*resistant(person)
+*isInfectious(person)
+*participate(course, person)
+classmates(person, person)
+
+//TODO:: Datalog ändert nichts an der Ausgabe -> weglassen
+//infectious(w, x) :- infectious(s, x), !resistant(w, x), [s = w - 1 AND w > 0].
+//resistant(s, u1) :- resistant(w, u1), [s = w + 1].
+//!infectious(w, u1) :- resistant(w, u1).
+
+// learned weights
+//-2.4151 participate(c1, u1)
+//8.9907 participate(c1, u1), participate(c2, u1), participate(c1, u2) => participate(c2, u2)
+
+classmates(p1, p2) :- participate(c1, p1), participate(c1, p2).
+
+resistant(u) => !infectious(u).
+isInfectious(u), !resistant(u) => infectious(u).
+
+//TODO:: Gewicht für 20% mit Formel exp(w) / (exp(w)+1) = 0,2 mit w = -1,386
+
+-5 infectious(u2)
+3.614 participate(c1, u1), participate(c1, u2), isInfectious(u1), !resistant(u2) => infectious(u2)
+
+//TODO:: Gewicht für 04% mit Formel exp(w) / (exp(w)+1) = 0,04 mit w = -3.178
+//-6.792 infectious(u2)
+//3.614 participate(c1, u1), participate(c1, u2), isInfectious(u1), !resistant(u2) => infectious(u2)
+
+
+
+//TODO:: Wahrscheinlichkeit sich vor VL-Beginn zu infezieren
+//TODO:: Wochen Zyklen -> ungerade Kurse finden an ungeraden Wochen statt
+//TODO:: Nur Vorlesungen mit weniger als 100 Studenten sind präsenz
+//TODO:: Studenten dürfen nur eine Präsenz Vorlesung besuchen (sameStudent)
+//TODO:: Ohne Einschränkungen -> zufällige Stichprobe (mehrmals durchführen Anzahl der infectious Studenten in Prozent)

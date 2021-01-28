@@ -1,0 +1,22 @@
+ //EVIDENCE
+
+//TODO:: marginal inferene or inference?
+
+infectious(person)
+*resistant(person)
+*isInfectious(person)
+*participate(course, person)
+
+resistant(u) => !infectious(u).
+isInfectious(u) => infectious(u).
+
+//Gewicht für 20% mit Formel exp(w) / (exp(w)+1) = 0,2 mit w = -1,386
+
+//-5 infectious(u2)
+//3.614 participate(c1, u1), participate(c1, u2), isInfectious(u1), !resistant(u2) => infectious(u2)
+
+//Gewicht für 04% mit Formel exp(w) / (exp(w)+1) = 0,04 mit w = -3.178
+-6.792 infectious(u2)
+3.614 participate(c1, u1), participate(c1, u2), isInfectious(u1), !resistant(u2) => infectious(u2)
+
+
